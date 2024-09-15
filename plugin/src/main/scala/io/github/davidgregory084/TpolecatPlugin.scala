@@ -18,9 +18,9 @@ package org.typelevel.sbt.tpolecat
 
 import bleep.model
 import bleep.nosbt.librarymanagement
+import org.typelevel.scalacoptions.*
 
 import scala.util.Try
-import org.typelevel.scalacoptions._
 
 class TpolecatPlugin(
     // The default mode to use for configuring scalac options via the sbt-tpolecat plugin.
