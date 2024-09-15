@@ -17,6 +17,8 @@ ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
 ThisBuild / versionScheme := Some(VersionScheme.EarlySemVer)
 
+ThisBuild / scalaVersion := "2.12.19"
+
 lazy val `sbt-tpolecat` = project
   .in(file("."))
   .enablePlugins(NoPublishPlugin)
@@ -36,9 +38,9 @@ lazy val `sbt-tpolecat-plugin` = project
     Test / headerCreate    := { (Test / headerCreate).triggeredBy(Test / compile).value },
     scalacOptions += "-Xlint:unused",
     libraryDependencies ++= Seq(
-      "org.typelevel"     %% "scalac-options"  % "0.1.4",
-      "org.scalatest"     %% "scalatest"       % "3.2.16"   % Test,
-      "org.scalacheck"    %% "scalacheck"      % "1.17.1"   % Test,
+      "org.typelevel"     %% "scalac-options"  % "0.1.7",
+      "org.scalatest"     %% "scalatest"       % "3.2.19"   % Test,
+      "org.scalacheck"    %% "scalacheck"      % "1.18.0"   % Test,
       "org.scalatestplus" %% "scalacheck-1-16" % "3.2.14.0" % Test
     ),
     mimaPreviousArtifacts := Set(
@@ -64,6 +66,8 @@ lazy val `sbt-tpolecat-scalafix` = scalafixProject("sbt-tpolecat")
     )
   )
   .inputSettings(addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.4.0"))
+  .inputSettings(tlFatalWarnings := false)
   .inputConfigure(_.enablePlugins(SbtPlugin))
+  .outputSettings(tlFatalWarnings := false)
   .outputConfigure(_.dependsOn(`sbt-tpolecat-plugin`))
   .outputConfigure(_.enablePlugins(SbtPlugin))
